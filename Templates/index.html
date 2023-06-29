@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SP Projects</title>
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='img2.jpg') }}");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 36px;
+      color: white;
+      font-family: "Comic Sans MS", "cursive";
+      font-weight: bolder;
+      margin: 0;
+    }
+    h2{
+      font-family: "Comic Sans MS", "cursive";
+    }
+    .form-container {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      padding-right: 50px;
+      padding-bottom: 10px;
+    }
+    ul{
+      font-family: "Comic Sans MS", "cursive";
+      color: darkgreen;
+    }
+    .form-container h2 {
+      font-size: 24px;
+      color: darkred;
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="number"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: "Comic Sans MS", "cursive";
+      color: black;
+    }
+    .form-container input[type="submit"] {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 20px;
+      border: none;
+      background-color: black;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: "Comic Sans MS", "cursive";
+    }
+    .prediction {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
+      font-family: "Comic Sans MS", "cursive";
+      color: darkblue;
+    }
+    .ratio-list {
+      margin-top: 30px;
+      padding-left: 0;
+      list-style-type: none;
+    }
+    .ratio-list li {
+      margin-bottom: 5px;
+      color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>CO_CO2 RATIO PREDICTION USING MACHINE LEARNING</h1>
+    </div>
+    <div class="form-container">
+      <h2>Input Values</h2>
+      <form action="{{ url_for('predict') }}" method="post">
+        <input type="text" name="DATE_TIME" placeholder="DATE_TIME">
+        <input type="number" step="any" name="CB_FLOW" placeholder="CB_FLOW">
+        <input type="number" step="any" name="CB_PRESS" placeholder="CB_PRESS">
+        <input type="number" step="any" name="CB_TEMP" placeholder="CB_TEMP">
+        <input type="number" step="any" name="STEAM_FLOW" placeholder="STEAM_FLOW">
+        <input type="number" step="any" name="STEAM_TEMP" placeholder="STEAM_TEMP">
+        <input type="number" step="any" name="STEAM_PRESS" placeholder="STEAM_PRESS">
+        <input type="number" step="any" name="O2_PRESS" placeholder="O2_PRESS">
+        <input type="number" step="any" name="O2_FLOW" placeholder="O2_FLOW">
+        <input type="number" step="any" name="O2_PER" placeholder="O2_PER">
+        <input type="number" step="any" name="PCI" placeholder="PCI">
+        <input type="number" step="any" name="ATM_HUMID" placeholder="ATM_HUMID">
+        <input type="number" step="any" name="HB_TEMP" placeholder="HB_TEMP">
+        <input type="number" step="any" name="HB_PRESS" placeholder="HB_PRESS">
+        <input type="number" step="any" name="TOP_PRESS" placeholder="TOP_PRESS">
+        <input type="number" step="any" name="TOP_TEMP1" placeholder="TOP_TEMP1">
+        <input type="number" step="any" name="TOP_SPRAY" placeholder="TOP_SPRAY">
+        <input type="number" step="any" name="TOP_TEMP" placeholder="TOP_TEMP">
+        <input type="number" step="any" name="TOP_PRESS_1" placeholder="TOP_PRESS_1">
+        <input type="number" step="any" name="H2" placeholder="H2">
+        <input type="number" step="any" name="SKIN_TEMP_AVG" placeholder="SKIN_TEMP_AVG">
+        <input type="number" step="any" name="CO" placeholder="CO">
+        <input type="number" step="any" name="CO2" placeholder="CO2">
+        <input type="submit" value="Predict">
+      </form>
+      <br>
+      <div class="prediction">
+        {{ prediction_text }}
+      </div>
+
+      {% if ratios %}
+      <h2>CO:CO2 Ratios</h2>
+      <ul class="ratio-list">
+        {% for ratio in ratios %}
+        <li>{{ ratio }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

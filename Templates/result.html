@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+  <style>
+    body {
+      background: rgb(246,247,193);
+      background: linear-gradient(90deg, rgba(246,247,193,1) 25%, rgba(190,240,203,1) 61%, rgba(209,255,243,1) 100%);
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: "Comic Sans MS", "cursive";
+    }
+    h1 {
+      color: black;
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    p {
+      color: #0e2445;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 0;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 30px;
+    }
+    li {
+      color: #922172;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>CO_CO2 RATIO PREDICTION RESULTS</h1>
+    </div>
+    <div class="prediction">
+      <h2>{{ prediction_text }}</h2>
+    </div>
+    <div class="ratio-chart">
+      <h2>CO:CO2 Ratios</h2>
+      <img src="data:image/png;base64,{{ img_base64 }}" alt="Ratio Chart">
+    </div>
+    <div class="ratio-list">
+      <ul>
+        {% for ratio in ratio_labels %}
+        <li>{{ ratio }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</body>
+</html>
